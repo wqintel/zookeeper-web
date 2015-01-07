@@ -1,0 +1,33 @@
+group = 'com.zk'
+version = "0.0.1-SNAPSHOT"
+
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'war'
+apply plugin: 'eclipse'
+apply plugin: 'eclipse-wtp'
+
+dependencies {
+   compile 'com.github.adyliu:zkclient:2.1.1'
+   testCompile 'junit:junit:4.11'
+}
+
+eclipse {
+   classpath { downloadSources=true }
+}
+
+tasks.withType(JavaCompile) {
+   sourceCompatibility = 1.7
+   targetCompatibility = 1.7
+}
+
+repositories {
+   maven { url "http://maven.oschina.net/content/groups/public" }
+   mavenCentral()
+}
+
+
+task wrapper(type: Wrapper) { gradleVersion = '2.2.1' }
+
+[compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
+

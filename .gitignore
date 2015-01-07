@@ -24,3 +24,7 @@ local.properties
 
 # PDT-specific
 .buildpath
+/bin
+
+# gradle
+.gradle
