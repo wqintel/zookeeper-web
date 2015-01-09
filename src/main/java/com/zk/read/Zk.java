@@ -10,8 +10,8 @@ import org.slf4j.LoggerFactory;
 import com.github.zkclient.ZkClient;
 import com.zk.ZkData;
 
-public class ZkReader {
-   private static final Logger LOGGER = LoggerFactory.getLogger(ZkReader.class);
+public class Zk {
+   private static final Logger LOGGER = LoggerFactory.getLogger(Zk.class);
    // 192.168.161.61:2181,192.168.161.83:2181
    private ZkClient client;
 
@@ -25,7 +25,7 @@ public class ZkReader {
    public ZkData readData(String path) {
       ZkData zkdata = new ZkData();
       Stat stat = new Stat();
-      zkdata.setData(client.readData(getPath(path), stat));
+      zkdata.setData(getClient().readData(getPath(path), stat));
       zkdata.setStat(stat);
       return zkdata;
    }
@@ -34,7 +34,32 @@ public class ZkReader {
       return getClient().getChildren(getPath(path));
    }
 
-   public ZkReader(String cxnString) {
+   public void create(String path, byte[] data) {
+      path = getPath(path);
+      getClient().createPersistent(path, true);
+      Stat stat = getClient().writeData(path, data);
+      LOGGER.info("create: node:{}, stat{}:", path, stat);
+   }
+
+   public void edit(String path, byte[] data) {
+      path = getPath(path);
+      Stat stat = getClient().writeData(path, data);
+      LOGGER.info("edit: node:{}, stat{}:", path, stat);
+   }
+
+   public void delete(String path, byte[] data) {
+      path = getPath(path);
+      boolean del = getClient().delete(path);
+      LOGGER.info("delete: node:{}, boolean{}:", path, del);
+   }
+
+   public void deleteRecursive(String path, byte[] data) {
+      path = getPath(path);
+      boolean deleteRecursive = getClient().deleteRecursive(path);
+      LOGGER.info("rmr: node:{}, boolean{}:", path, deleteRecursive);
+   }
+
+   public Zk(String cxnString) {
       LOGGER.info("cxnString:{}", cxnString);
       this.client = new ZkClient(cxnString);
    }
@@ -49,7 +74,7 @@ public class ZkReader {
 
    private String getPath(String path) {
       path = path == null ? "/" : path.trim();
-      if(!StringUtils.startsWith(path, "/")) {
+      if (!StringUtils.startsWith(path, "/")) {
          path = "/" + path;
       }
       return path;

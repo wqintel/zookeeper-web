@@ -9,12 +9,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.zk.ZkData;
-import com.zk.read.ZkReader;
+import com.zk.read.Zk;
 
 public class ZkReaderTest {
 
    private static final Logger LOGGER = LoggerFactory.getLogger(ZkReaderTest.class);
-   private static ZkReader reader;
+   private static Zk reader;
 
    @Test
    public void testExists() {
@@ -43,7 +43,7 @@ public class ZkReaderTest {
 
    @BeforeClass
    public static void initReader() {
-      reader = new ZkReader("192.168.161.61:2181,192.168.161.83:2181");
+      reader = new Zk("192.168.161.61:2181,192.168.161.83:2181");
    }
 
 }

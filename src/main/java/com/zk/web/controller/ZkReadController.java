@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.zk.ZkData;
-import com.zk.read.ZkReader;
+import com.zk.read.Zk;
 
 @Controller
 @RequestMapping("/read")
@@ -46,7 +46,7 @@ public class ZkReadController {
       path = StringUtils.isBlank(path) ? "/" : StringUtils.trimToEmpty(path);
       model.addAttribute("pathList", Arrays.asList(StringUtils.split(path, "/")));
 
-      ZkReader reader = new ZkReader(cxnstr);
+      Zk reader = new Zk(cxnstr);
 
       List<String> children = reader.getChildren(path);
       if(CollectionUtils.isNotEmpty(children)) {
