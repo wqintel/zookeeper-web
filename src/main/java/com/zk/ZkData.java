@@ -7,8 +7,8 @@ import org.apache.zookeeper.data.Stat;
 
 public class ZkData {
 
-   public byte[] data;
-   public Stat stat;
+   private byte[] data;
+   private Stat stat;
 
    public byte[] getBytes() {
       return data;
@@ -16,10 +16,26 @@ public class ZkData {
 
    @Override
    public String toString() {
-      return "ZkData [data=" + Arrays.toString(data) + ",stat=" + stat + "]";
+      return "ZkData [data=" + Arrays.toString(getData()) + ",stat=" + getStat() + "]";
    }
 
-   String getString() {
-      return new String(data, Charset.forName("UTF-8"));
+   public String getDataString() {
+      return new String(getData(), Charset.forName("UTF-8"));
+   }
+   
+   public byte[] getData() {
+      return data;
+   }
+
+   public void setData(byte[] data) {
+      this.data = data;
+   }
+
+   public Stat getStat() {
+      return stat;
+   }
+
+   public void setStat(Stat stat) {
+      this.stat = stat;
    }
 }

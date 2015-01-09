@@ -9,6 +9,18 @@ apply plugin: 'eclipse-wtp'
 
 dependencies {
    compile 'com.github.adyliu:zkclient:2.1.1'
+
+   compile 'org.springframework:spring-webmvc:4.1.1.RELEASE'
+   compile 'org.springframework:spring-context-support:4.1.1.RELEASE'
+
+   compile 'org.freemarker:freemarker:2.3.19'
+   compile 'com.fasterxml.jackson.core:jackson-databind:2.1.4'
+   compile 'commons-io:commons-io:2.4'
+   compile 'org.apache.commons:commons-lang3:3.3.2'
+   compile 'commons-beanutils:commons-beanutils:1.9.2'
+   
+   providedCompile 'servletapi:servlet-api:2.4'
+
    testCompile 'junit:junit:4.11'
 }
 

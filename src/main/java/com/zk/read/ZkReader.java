@@ -2,12 +2,16 @@ package com.zk.read;
 
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.zookeeper.data.Stat;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.github.zkclient.ZkClient;
 import com.zk.ZkData;
 
 public class ZkReader {
+   private static final Logger LOGGER = LoggerFactory.getLogger(ZkReader.class);
    // 192.168.161.61:2181,192.168.161.83:2181
    private ZkClient client;
 
@@ -21,8 +25,8 @@ public class ZkReader {
    public ZkData readData(String path) {
       ZkData zkdata = new ZkData();
       Stat stat = new Stat();
-      zkdata.data = client.readData(getPath(path), stat);
-      zkdata.stat = stat;
+      zkdata.setData(client.readData(getPath(path), stat));
+      zkdata.setStat(stat);
       return zkdata;
    }
 
@@ -31,6 +35,7 @@ public class ZkReader {
    }
 
    public ZkReader(String cxnString) {
+      LOGGER.info("cxnString:{}", cxnString);
       this.client = new ZkClient(cxnString);
    }
 
@@ -43,14 +48,11 @@ public class ZkReader {
    }
 
    private String getPath(String path) {
-      return path == null ? "/" : path.trim();
-   }
-
-   public static void main(String[] args) {
-      List<String> a = new ZkReader("192.168.161.61:2181,192.168.161.83:2181").getChildren("/tops");
-      for (String s : a) {
-         System.out.println(s);
+      path = path == null ? "/" : path.trim();
+      if(!StringUtils.startsWith(path, "/")) {
+         path = "/" + path;
       }
+      return path;
    }
 
 }
