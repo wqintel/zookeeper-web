@@ -9,6 +9,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.beanutils.PropertyUtils;
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -48,7 +49,9 @@ public class ZkReadController {
       ZkReader reader = new ZkReader(cxnstr);
 
       List<String> children = reader.getChildren(path);
-      Collections.sort(children);
+      if(CollectionUtils.isNotEmpty(children)) {
+         Collections.sort(children);
+      }
       model.addAttribute("children", children);
 
       ZkData zkData = reader.readData(path);

@@ -13,6 +13,7 @@
 	<mvc:resources mapping="/js/**" location="/resources/js/" cache-period="86400"/>
 	<mvc:resources mapping="/css/**" location="/resources/css/" cache-period="86400"/>
 	<mvc:resources mapping="/img/**" location="/resources/img/" cache-period="86400"/>
+	<mvc:resources mapping="/fonts/**" location="/resources/fonts/" cache-period="86400"/>
 
 	<bean id="exceptionResolver" class="com.zk.web.interceptor.CustomizedHandlerExceptionResolver" />
 

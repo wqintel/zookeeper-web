@@ -7,6 +7,7 @@ import java.io.StringWriter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.Ordered;
@@ -23,14 +24,15 @@ public class CustomizedHandlerExceptionResolver implements HandlerExceptionResol
       return Integer.MIN_VALUE;
    }
 
-   public ModelAndView resolveException(HttpServletRequest aReq, HttpServletResponse aRes, Object aHandler, Exception exception) {
+   public ModelAndView resolveException(HttpServletRequest aReq, HttpServletResponse aRes, Object aHandler,
+         Exception exception) {
       if (aHandler instanceof HandlerMethod) {
          if (exception instanceof BindException) {
             return null;
          }
       }
-      LOGGER.error("", exception);
-      ModelAndView mav = new ModelAndView("error");
+      LOGGER.error(StringUtils.EMPTY, exception);
+      ModelAndView mav = new ModelAndView("common/error");
       String errorMsg = exception.getMessage();
       aRes.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());
       if ("XMLHttpRequest".equals(aReq.getHeader("X-Requested-With"))) {
