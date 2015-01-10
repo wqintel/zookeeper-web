@@ -1,4 +1,4 @@
-package com.zk;
+package com.zk.entity;
 
 import java.nio.charset.Charset;
 import java.util.Arrays;

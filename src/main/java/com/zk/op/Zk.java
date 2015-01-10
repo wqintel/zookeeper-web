@@ -1,4 +1,4 @@
-package com.zk.read;
+package com.zk.op;
 
 import java.util.List;
 
@@ -8,7 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.github.zkclient.ZkClient;
-import com.zk.ZkData;
+import com.zk.entity.ZkData;
 
 public class Zk {
    private static final Logger LOGGER = LoggerFactory.getLogger(Zk.class);
@@ -47,13 +47,13 @@ public class Zk {
       LOGGER.info("edit: node:{}, stat{}:", path, stat);
    }
 
-   public void delete(String path, byte[] data) {
+   public void delete(String path) {
       path = getPath(path);
       boolean del = getClient().delete(path);
       LOGGER.info("delete: node:{}, boolean{}:", path, del);
    }
 
-   public void deleteRecursive(String path, byte[] data) {
+   public void deleteRecursive(String path) {
       path = getPath(path);
       boolean deleteRecursive = getClient().deleteRecursive(path);
       LOGGER.info("rmr: node:{}, boolean{}:", path, deleteRecursive);
@@ -61,7 +61,7 @@ public class Zk {
 
    public Zk(String cxnString) {
       LOGGER.info("cxnString:{}", cxnString);
-      this.client = new ZkClient(cxnString);
+      this.client = ClientCacheManager.getClient(cxnString);
    }
 
    public ZkClient getClient() {

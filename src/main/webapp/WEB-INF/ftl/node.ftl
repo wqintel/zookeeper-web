@@ -13,13 +13,13 @@
 				<div class="col-md-12 column">
 					<nav class="navbar navbar-default navbar-fixed-bottom" role="navigation">
 						<div>
+						<#if isLogin()>
 						<div class="navbar-header" style="margin-left: 35%;">
-							 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"> 
-							 <span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
 							 <span class="navbar-brand">管理工具</span>
 						</div>
-						
+						</#if>
 						<div class="collapse navbar-collapse  style="margin-left: 35%;"" id="bs-example-navbar-collapse-1">
+							<#if isLogin()>
 							<ul class="nav navbar-nav">
 								<li>
 									<a data-toggle="modal" data-target="#createModal" href="#createModal">创建</a>
@@ -34,12 +34,17 @@
 									<a data-toggle="modal" data-target="#rmrModal" href="#rmrModal">级联删除</a>
 								</li>
 							</ul>
+							</#if>
 							<ul class="nav nav-pills navbar-right" style="margin-right: 8%;">
 								<li>
-									 <a>游客</a>
+									 <a><#if isLogin()>${zk_user!""}<#else>游客</#if></a>
 								</li>
 								<li class="active">
-									 <a href="${host}/login">登录</a>
+									 <#if isLogin()>
+									 <a href="${host}/logout">注销</a>
+									 <#else>
+									 <a data-toggle="modal" data-target="#loginModal" href="#loginModal">登录</a>
+									 </#if>
 								</li>
 							</ul>
 						</div>
@@ -102,6 +107,7 @@
 				</div>
 			</div>
 			
+		</div>
 
 <div class="modal fade" id="createModal">
   <div class="modal-dialog">
@@ -208,7 +214,37 @@
   </div>
 </div>
 
-		</div>
+<!--login modal-->
+<div id="loginModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog">
+  <div class="modal-content">
+      <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+          <h1 class="text-center">登录</h1>
+      </div>
+      <div class="modal-body">
+          <form class="form col-md-12 center-block" action="${host}/login" method="POST">
+            <div class="form-group">
+              <input required name="username" type="text" class="form-control input-lg" placeholder="用户名">
+            </div>
+            <div class="form-group">
+              <input required name="password" type="password" class="form-control input-lg" placeholder="密码">
+            </div>
+            <div class="form-group">
+              <button class="btn btn-primary btn-lg btn-block">登录</button>
+              <span class="pull-left">帐号的配置在/zookeeper-web/src/main/resources/conf/user.properties</span><#--<span><a href="#">Need help?</a></span>-->
+            </div>
+          </form>
+      </div>
+      <div class="modal-footer-login modal-footer">
+          <div class="col-md-12">
+          <button class="btn" data-dismiss="modal" aria-hidden="true">取消</button>
+		  </div>
+      </div>
+  </div>
+  </div>
+</div>
+
 
 	</body>
 </html>

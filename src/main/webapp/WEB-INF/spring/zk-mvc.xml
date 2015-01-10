@@ -19,6 +19,13 @@
 
 	<bean id="mappingJackson2HttpMessageConverter" class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter" />
 
+	<mvc:interceptors>
+		<mvc:interceptor>
+           <mvc:mapping path="/op/**" />
+           <bean class="com.zk.web.interceptor.AuthInterceptor" />
+        </mvc:interceptor>
+	</mvc:interceptors>
+
 	<!-- freemarker配置 -->
 	<bean id="freemarkerResolver"
 		class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
@@ -50,6 +57,14 @@
 				<prop key="auto_import">/common/env.ftl as tops_pch_env</prop>
 			</props>
 		</property>
+		<property name="freemarkerVariables">
+			<map>
+				<entry key="isLogin">
+					<bean class="com.zk.web.freemarker.IsLogin" />
+				</entry>
+			</map>
+		</property>
+				
 	</bean>
 
 

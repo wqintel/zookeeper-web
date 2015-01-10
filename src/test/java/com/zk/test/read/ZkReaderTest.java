@@ -8,8 +8,8 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.zk.ZkData;
-import com.zk.read.Zk;
+import com.zk.entity.ZkData;
+import com.zk.op.Zk;
 
 public class ZkReaderTest {
 
