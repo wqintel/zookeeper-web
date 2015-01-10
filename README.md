@@ -1,9 +1,13 @@
-# zookeeper-web - 在线 zookeeper数据管理工具
+# zookeeper-web - 在线 zookeeper管理工具
 
 ------
 
     zookeeper-web是一个简单的、方便的zookeeper管理工具。我厌烦了通过命令行来管理zookeeper，同时需要一个我熟悉的框架来开发的工具。借鉴了github上一个用python写的管理工具（抱歉，我后来没有找到这个项目的地址）。
     使用主流的springmvc、freemarker、bootstrap和zkclient来开发。
+
+开发的时间比较短，在三天的时间里，利用零零碎碎的时间把这个项目搞定。期望不要太高。
+
+**简单一点 方便一点**
 
 ------
 
@@ -61,5 +65,5 @@ hh.suse@gmail.com
 2015-01-10
 
   [1]: http://localhost:8080/zookeeper-web
-  [2]: ./doc/img/conf.jpg
+  [2]: ./doc/img/index.jpg
   [3]: http://my.oschina.net/u/918233

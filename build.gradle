@@ -1,5 +1,5 @@
 group = 'com.zk'
-version = "0.0.1-SNAPSHOT"
+version = "1.0.0.RELEASE"
 
 apply plugin: 'java'
 apply plugin: 'idea'
