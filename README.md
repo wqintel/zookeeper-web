@@ -61,7 +61,7 @@ hh.suse@gmail.com
 
 ------
 
-作者 [@stony.cry][3]     
+作者 [@花花][3]     
 2015-01-10
 
   [1]: http://localhost:8080/zookeeper-web
