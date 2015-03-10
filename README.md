@@ -61,9 +61,8 @@ hh.suse@gmail.com
 
 ------
 
-作者 [@花花][3]     
+作者 [@crystony]
 2015-01-10
 
   [1]: http://localhost:8080/zookeeper-web
   [2]: ./doc/img/index.jpg
-  [3]: http://my.oschina.net/u/918233
